@@ -1,37 +1,24 @@
 fileFormatVersion: 2
-guid: 9bd3a6bb19b119942a07245a8f783169
-AssetOrigin:
-  serializedVersion: 1
-  productId: 155360
-  packageName: Pixel Adventure 1
-  packageVersion: 1.0
-  assetPath: Assets/Pixel Adventure 1/Assets/Main Characters/Virtual Guy/Hit (32x32).png
-  uploadId: 332803
+guid: 063497877c7145a4ca4acd5c6cbf4c73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6868122594974341346
-    second: Hit (32x32)_0
+      213: 4457663794195168306
+    second: Hit_0
   - first:
-      213: 7167584040609486739
-    second: Hit (32x32)_1
+      213: -5364657433725072944
+    second: Hit_1
   - first:
-      213: -1675461080110260169
-    second: Hit (32x32)_2
+      213: -4947864620551752270
+    second: Hit_2
   - first:
-      213: 8480664182131228983
-    second: Hit (32x32)_3
+      213: 8733631668352107246
+    second: Hit_3
   - first:
-      213: -953560442851353963
-    second: Hit (32x32)_4
-  - first:
-      213: -3450976776972242761
-    second: Hit (32x32)_5
-  - first:
-      213: 7062579536633761780
-    second: Hit (32x32)_6
+      213: -7612900313820856468
+    second: Hit_4
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -76,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,6 +92,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -117,6 +105,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -137,8 +126,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a62336805af0d0849be23153a2f1537f
-      internalID: 6868122594974341346
+      spriteID: 7142458fd6c6762498d2d969eaa90b27
+      internalID: -967205131
       vertices: []
       indices: 
       edges: []
@@ -158,8 +147,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15e8a18ea1266f0448c53a598056808a
-      internalID: 7167584040609486739
+      spriteID: 0f650fad29e63a949be5949fd4eea6d1
+      internalID: 1551351402
       vertices: []
       indices: 
       edges: []
@@ -179,8 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e47310c939f1b3346a76d1517c54940d
-      internalID: -1675461080110260169
+      spriteID: 61355650ea452604cb8a6003b7c1ab46
+      internalID: 313839271
       vertices: []
       indices: 
       edges: []
@@ -200,8 +189,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac2c9eb843ebe4a4481730bde3254529
-      internalID: 8480664182131228983
+      spriteID: d22ae06603590b440acfb3a0020c9d13
+      internalID: -1541454239
       vertices: []
       indices: 
       edges: []
@@ -221,50 +210,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e8ab2736787bef41b301b11a2ba701c
-      internalID: -953560442851353963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hit (32x32)_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1cd1bccbf7378bd4797051abeb133f17
-      internalID: -3450976776972242761
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hit (32x32)_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5999b75e91231254082dccfd02a68af1
-      internalID: 7062579536633761780
+      spriteID: b622bfd17633e6a4d894db16515cb05d
+      internalID: 1647162036
       vertices: []
       indices: 
       edges: []
@@ -280,13 +227,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hit (32x32)_0: 6868122594974341346
-      Hit (32x32)_1: 7167584040609486739
-      Hit (32x32)_2: -1675461080110260169
-      Hit (32x32)_3: 8480664182131228983
-      Hit (32x32)_4: -953560442851353963
-      Hit (32x32)_5: -3450976776972242761
-      Hit (32x32)_6: 7062579536633761780
+      Hit (32x32)_0: -967205131
+      Hit (32x32)_1: 1551351402
+      Hit (32x32)_2: 313839271
+      Hit (32x32)_3: -1541454239
+      Hit (32x32)_4: 1647162036
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

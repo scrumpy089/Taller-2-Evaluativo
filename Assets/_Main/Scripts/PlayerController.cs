@@ -54,19 +54,26 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();  // Obtiene el componente Rigidbody2D del jugador.
+        playerAnimator = GetComponent<Animator>();  // Obtiene el componente Animator para controlar animaciones.
+        hit_ps = GetComponentInChildren<ParticleSystem>();  // Obtiene el sistema de partículas del jugador (hijo del objeto).
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, mudLayer))
+        if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer))
         {
             canJump = true;
         }
         else
         {
             canJump = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && canJump)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Aplica la fuerza de salto al Rigidbody2D.
         }
 
         playerAnimator.SetFloat("IsRunning", movement);
@@ -102,14 +109,18 @@ public class PlayerController : MonoBehaviour
             }
             hitTime -= Time.deltaTime;  // Reduce el tiempo durante el cual el jugador es empujado.
 
-            playerAnimator.SetFloat("Movement", movement);  // Actualiza la animación de movimiento del jugador en el Animator.
+            playerAnimator.SetTrigger("IsAttacked");  // Actualiza la animación de movimiento del jugador en el Animator.
 
             // Si el jugador presiona la barra espaciadora y puede saltar, se le aplica una fuerza hacia arriba.
-            if (Input.GetKeyDown(KeyCode.W) && canJump)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Aplica la fuerza de salto al Rigidbody2D.
-            }
+         
+        }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            playerAnimator.SetTrigger("IsAttacked");
         }
     }
 
