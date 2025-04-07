@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] public float hitForceX;
     [SerializeField] public float hitForceY;
     [SerializeField] public int hitTime;
+    [SerializeField] public int particles;
+    [SerializeField] private Material particleMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +94,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // Este método se llama cuando el enemigo colisiona con otro objeto.
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         // Verifica si el enemigo ha colisionado con un objeto que tenga el tag "Player".
         if (collision.gameObject.CompareTag("Player"))
@@ -100,6 +103,7 @@ public class EnemyBehaviour : MonoBehaviour
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
             // Llama al método del jugador para que reciba daño.
+            player.SetParticleMaterial(particleMaterial);
             player.TakeDamage(enemyDamage);
             // Establece el tiempo que el jugador estará siendo empujado después de la colisión.
             player.hitTime = hitTime;
@@ -119,6 +123,8 @@ public class EnemyBehaviour : MonoBehaviour
 
             // Activa el trigger en el Animator para iniciar la animación de ataque del enemigo.
             enemyAnimator.SetTrigger("IsAttacked");
+
+            player.particleCount = particles;
         }
     }
 }

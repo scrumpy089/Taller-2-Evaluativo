@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
     [Tooltip("El radio de la zona de verificación del suelo (es un círculo).")]
     [SerializeField] private float groundRadius;
     [Tooltip("La capa en la que se consideran los objetos \"suelo\".")]
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask GroundLayer;
     [Tooltip("La capa en la que se consideran los objetos \"barro\", que afectan al movimiento del jugador.")]
     [SerializeField] private LayerMask mudLayer;
     [Tooltip("El sistema de partículas que se reproducirá cuando el jugador reciba daño.")]
     [SerializeField] private ParticleSystem hit_ps;
     [Tooltip("El componente Animator para controlar las animaciones del jugador.")]
-    [SerializeField] private Animator playerAnimator;
+    [SerializeField] public Animator playerAnimator;
 
     private float movement;
 
@@ -51,18 +51,27 @@ public class PlayerController : MonoBehaviour
     [Tooltip("La cantidad de partículas que se generarán cuando el jugador reciba daño.")]
     public float particleCount;
 
+    [SerializeField] private Material ME1;
+    [SerializeField] private Material ME2;
+    [SerializeField] private Material ME3;
+    [SerializeField] private Material DMG;
+    [SerializeField] private Material HEAL;
+
+    private ParticleSystemRenderer psRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();  // Obtiene el componente Rigidbody2D del jugador.
         playerAnimator = GetComponent<Animator>();  // Obtiene el componente Animator para controlar animaciones.
         hit_ps = GetComponentInChildren<ParticleSystem>();  // Obtiene el sistema de partículas del jugador (hijo del objeto).
+        psRenderer = hit_ps.GetComponent<ParticleSystemRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer))
+        if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, GroundLayer))
         {
             canJump = true;
         }
@@ -71,8 +80,11 @@ public class PlayerController : MonoBehaviour
             canJump = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && canJump)
+        //canJump = Physics2D.OverlapCircle(groundCheck.position, groundRadius, GroundLayer);
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump == true)
         {
+            //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Aplica la fuerza de salto al Rigidbody2D.
         }
 
@@ -112,7 +124,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetTrigger("IsAttacked");  // Actualiza la animación de movimiento del jugador en el Animator.
 
             // Si el jugador presiona la barra espaciadora y puede saltar, se le aplica una fuerza hacia arriba.
-         
+
         }
     }
 
@@ -130,14 +142,20 @@ public class PlayerController : MonoBehaviour
         healthText.text = $"Health: {health}/{maxHealth}";  // Actualiza la UI para mostrar la nueva vida del jugador.
 
         // Configura y reproduce el sistema de partículas para mostrar un efecto visual cuando el jugador recibe daño.
-        ParticleSystem.Burst burst = hit_ps.emission.GetBurst(0);  // Obtiene la configuración de la emisión de partículas en el índice 0 del sistema de partículas del jugador (esto está relacionado con el efecto visual de daño).
+
+        ParticleSystem.Burst burst = hit_ps.emission.GetBurst(0);  // Obtiene la configuración de la emisión de partículas en el índice 0 del sistema de partículas del jugador (esto está relacionado con el efecto visual de daño).    
         ParticleSystem.MinMaxCurve count = burst.count;  // Obtiene la cantidad de partículas que se reproducirán en el efecto.
 
         count.constant = particleCount;  // Establece la cantidad constante de partículas a reproducir. "particleCount" es una variable definida en el código que controla cuántas partículas se generarán.
         burst.count = count;  // Aplica el nuevo valor de la cantidad de partículas al objeto de emisión.
+
         hit_ps.emission.SetBurst(0, burst);  // Establece la configuración de la emisión de partículas con la nueva cantidad de partículas en el sistema de partículas.
 
         hit_ps.Play();  // Inicia la reproducción del sistema de partículas, mostrando el efecto visual del daño.
+
+        /*hit_ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        hit_ps.Emit((int)particleCount);*/
+
     }
 
     // Función para agregar salud al jugador.
@@ -146,6 +164,7 @@ public class PlayerController : MonoBehaviour
         if (health + _health > maxHealth)  // Si la nueva salud supera la salud máxima, ajusta la salud al valor máximo.
         {
             health = maxHealth;
+            
         }
         else
         {
@@ -153,5 +172,14 @@ public class PlayerController : MonoBehaviour
         }
 
         healthText.text = $"Health: {health}/{maxHealth}";  // Actualiza la UI con la nueva salud del jugador.
+
+        hit_ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        hit_ps.Emit((int)particleCount);
+    }
+
+    public void SetParticleMaterial(Material newMaterial)
+    {
+        psRenderer.material = newMaterial;
     }
 }
+
