@@ -35,7 +35,8 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] public float hitForceY;
     [SerializeField] public int hitTime;
     [SerializeField] public int particles;
-    [SerializeField] private Material particleMaterial;
+    
+    public int enemyIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +104,9 @@ public class EnemyBehaviour : MonoBehaviour
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
             // Llama al método del jugador para que reciba daño.
-            player.SetParticleMaterial(particleMaterial);
+            player.particleCount = particles;
+            player.spriteIndex = enemyIndex;
+           
             player.TakeDamage(enemyDamage);
             // Establece el tiempo que el jugador estará siendo empujado después de la colisión.
             player.hitTime = hitTime;
@@ -124,7 +127,7 @@ public class EnemyBehaviour : MonoBehaviour
             // Activa el trigger en el Animator para iniciar la animación de ataque del enemigo.
             enemyAnimator.SetTrigger("IsAttacked");
 
-            player.particleCount = particles;
+
         }
     }
 }

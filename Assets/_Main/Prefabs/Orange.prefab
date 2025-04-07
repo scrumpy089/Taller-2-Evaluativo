@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406549417745242951}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.495467, y: 0.041774273, z: -0.075059496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -148,6 +148,8 @@ MonoBehaviour:
   MasVida: 0
   itemAnimator: {fileID: 5363686091762668722}
   Particles: 5
+  itemIndex: 3
+  isHealing: 0
 --- !u!95 &5363686091762668722
 Animator:
   serializedVersion: 5

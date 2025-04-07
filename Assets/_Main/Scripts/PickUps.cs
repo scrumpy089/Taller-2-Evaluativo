@@ -11,8 +11,10 @@ public class PickUps : MonoBehaviour
     [SerializeField] private Animator itemAnimator;
 
     [SerializeField] public int Particles;
-    [SerializeField] private Material particleMaterial;
 
+    public int itemIndex;
+
+    public bool isHealing;
 
     // Start is called before the first frame update
     void Start()
@@ -32,17 +34,25 @@ public class PickUps : MonoBehaviour
         { 
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
-            player.SetParticleMaterial(particleMaterial);
-
-            player.TakeDamage(MenosVida);
-            player.AddHealth(MasVida);
-
+            player.spriteIndex = itemIndex;
             player.particleCount = Particles;
          
             if (MenosVida > 0)
             {           
                 player.playerAnimator.SetTrigger("IsAttacked");
             }
+
+            if (isHealing)
+            {
+                player.AddHealth(MasVida);
+
+            }
+            else
+            {
+
+                player.TakeDamage(MenosVida);
+            }
+
             
             this.gameObject.SetActive(false);
         }

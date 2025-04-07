@@ -51,13 +51,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("La cantidad de partículas que se generarán cuando el jugador reciba daño.")]
     public float particleCount;
 
-    [SerializeField] private Material ME1;
-    [SerializeField] private Material ME2;
-    [SerializeField] private Material ME3;
-    [SerializeField] private Material DMG;
-    [SerializeField] private Material HEAL;
+    
+    [SerializeField] private Sprite[] particleSprites;
+    public int spriteIndex;
 
-    private ParticleSystemRenderer psRenderer;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +63,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();  // Obtiene el componente Rigidbody2D del jugador.
         playerAnimator = GetComponent<Animator>();  // Obtiene el componente Animator para controlar animaciones.
         hit_ps = GetComponentInChildren<ParticleSystem>();  // Obtiene el sistema de partículas del jugador (hijo del objeto).
-        psRenderer = hit_ps.GetComponent<ParticleSystemRenderer>();
+        
     }
 
     // Update is called once per frame
@@ -151,6 +149,8 @@ public class PlayerController : MonoBehaviour
 
         hit_ps.emission.SetBurst(0, burst);  // Establece la configuración de la emisión de partículas con la nueva cantidad de partículas en el sistema de partículas.
 
+        hit_ps.textureSheetAnimation.SetSprite(0, particleSprites[spriteIndex]);
+        hit_ps.startColor = Color.red;
         hit_ps.Play();  // Inicia la reproducción del sistema de partículas, mostrando el efecto visual del daño.
 
         /*hit_ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -173,13 +173,19 @@ public class PlayerController : MonoBehaviour
 
         healthText.text = $"Health: {health}/{maxHealth}";  // Actualiza la UI con la nueva salud del jugador.
 
-        hit_ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        hit_ps.Emit((int)particleCount);
+        ParticleSystem.Burst burst = hit_ps.emission.GetBurst(0);  // Obtiene la configuración de la emisión de partículas en el índice 0 del sistema de partículas del jugador (esto está relacionado con el efecto visual de daño).    
+        ParticleSystem.MinMaxCurve count = burst.count;  // Obtiene la cantidad de partículas que se reproducirán en el efecto.
+
+        count.constant = particleCount;  // Establece la cantidad constante de partículas a reproducir. "particleCount" es una variable definida en el código que controla cuántas partículas se generarán.
+        burst.count = count;  // Aplica el nuevo valor de la cantidad de partículas al objeto de emisión.
+
+        hit_ps.emission.SetBurst(0, burst);  // Establece la configuración de la emisión de partículas con la nueva cantidad de partículas en el sistema de partículas.
+
+        hit_ps.textureSheetAnimation.SetSprite(0, particleSprites[spriteIndex]);
+        hit_ps.startColor = Color.green;
+        hit_ps.Play();
     }
 
-    public void SetParticleMaterial(Material newMaterial)
-    {
-        psRenderer.material = newMaterial;
-    }
+    
 }
 
