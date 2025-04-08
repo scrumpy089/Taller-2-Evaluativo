@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         hit_ps.emission.SetBurst(0, burst);  // Establece la configuración de la emisión de partículas con la nueva cantidad de partículas en el sistema de partículas.
 
         hit_ps.textureSheetAnimation.SetSprite(0, particleSprites[spriteIndex]);
-        hit_ps.startColor = Color.red;
+        //hit_ps.startColor = Color.red;
         hit_ps.Play();  // Inicia la reproducción del sistema de partículas, mostrando el efecto visual del daño.
 
         /*hit_ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
         hit_ps.emission.SetBurst(0, burst);  // Establece la configuración de la emisión de partículas con la nueva cantidad de partículas en el sistema de partículas.
 
         hit_ps.textureSheetAnimation.SetSprite(0, particleSprites[spriteIndex]);
-        hit_ps.startColor = Color.green;
+        //hit_ps.startColor = Color.green;
         hit_ps.Play();
     }
 

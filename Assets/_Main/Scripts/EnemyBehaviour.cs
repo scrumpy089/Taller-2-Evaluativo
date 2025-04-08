@@ -31,8 +31,8 @@ public class EnemyBehaviour : MonoBehaviour
     [Tooltip("El daño que el enemigo le causa al jugador al golpearlo.")]
     public float enemyDamage;
 
-    [SerializeField] public float hitForceX;
-    [SerializeField] public float hitForceY;
+    [SerializeField] public float enemyHitStrengthX;
+    [SerializeField] public float enemyHitStrengthY;
     [SerializeField] public int hitTime;
     [SerializeField] public int particles;
     
@@ -111,8 +111,8 @@ public class EnemyBehaviour : MonoBehaviour
             // Establece el tiempo que el jugador estará siendo empujado después de la colisión.
             player.hitTime = hitTime;
             // Establece la fuerza con la que el enemigo empuja al jugador tanto en el eje X como en el Y.
-            player.hitForceX = hitForceX;
-            player.hitForceY = hitForceY;
+            player.hitForceX = enemyHitStrengthX;
+            player.hitForceY = enemyHitStrengthY;
 
             // Determina desde qué dirección está siendo golpeado el jugador para aplicar el empuje en la dirección correcta.
             if (collision.transform.position.x <= transform.position.x)

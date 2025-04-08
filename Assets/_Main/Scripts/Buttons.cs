@@ -8,7 +8,9 @@ public class Buttons : MonoBehaviour
     public PlayerController Player;
     private float enemy1Damage = 10;
     private float Heal = 5;
-    
+
+    //public int itemIndex;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,7 @@ public class Buttons : MonoBehaviour
 
     public void Enemy1()
     {
-
+        Player.spriteIndex = 0;
         Player.TakeDamage(enemy1Damage);
 
         Player.hitFromRight = true;
@@ -39,10 +41,11 @@ public class Buttons : MonoBehaviour
     public void itemHeath1()
     {
 
-
+        Player.spriteIndex = 4;
         Player.AddHealth(Heal);
         Player.particleCount = 1;
 
-
     }
+
+    
 }
