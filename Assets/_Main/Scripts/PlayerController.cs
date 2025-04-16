@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite[] particleSprites;
     public int spriteIndex;
 
-    
+    public PlatformEffector2D effector;
+    public float waitTime = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -80,15 +81,26 @@ public class PlayerController : MonoBehaviour
 
         //canJump = Physics2D.OverlapCircle(groundCheck.position, groundRadius, GroundLayer);
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump == true)
+        if (Input.GetKeyDown(KeyCode.Space)  && canJump == true)
         {
             //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Aplica la fuerza de salto al Rigidbody2D.
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && canJump == true)
+        {           
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Aplica la fuerza de salto al Rigidbody2D.
         }
 
         playerAnimator.SetFloat("IsRunning", movement);
 
         movement = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.S)) 
+        {
+            effector.rotationalOffset = 180f;
+            StartCoroutine(ResetPlatform());
+        }
 
         if (movement < 0)
         {
@@ -186,6 +198,11 @@ public class PlayerController : MonoBehaviour
         hit_ps.Play();
     }
 
-    
+    IEnumerator ResetPlatform()
+    {
+        yield return new WaitForSeconds(waitTime);
+        effector.rotationalOffset = 0f;
+    }
+
 }
 
